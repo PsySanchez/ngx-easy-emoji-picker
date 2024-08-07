@@ -37,7 +37,7 @@ import { HttpClientModule } from "@angular/common/http";
 export class AppModule {}
 ```
 
-# for new version of angular
+**for new version of angular**
 
 app.config.ts
 
