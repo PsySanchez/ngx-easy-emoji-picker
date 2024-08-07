@@ -1,6 +1,6 @@
 ## ngx-emoji-picker
 
-![Example Image](https://github.com/PsySanchez/ngx-easy-image-drawing/blob/master/emoji-picker.png)
+![Example Image](https://github.com/PsySanchez/ngx-emoji-picker/blob/master/src/emoji-picker.png)
 
 Angular library that provides a component for easily integrating emoji selection into your web applications. It offers a user-friendly interface for browsing and selecting emojis, which can be customized to match your application's design.
 

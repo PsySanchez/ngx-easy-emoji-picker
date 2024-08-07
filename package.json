@@ -1,12 +1,26 @@
 {
-  "name": "ngx-emoji-picker",
+  "name": "ngx-easy-emoji-picker",
   "version": "0.0.1",
+  "author": "Alex Voronin <alex.varonin@gmail.com>",
+  "license": "MIT",
   "peerDependencies": {
     "@angular/common": "^18.1.0",
     "@angular/core": "^18.1.0"
   },
+  "description": "Angular library that provides a component for easily integrating emoji selection into your web applications. It offers a user-friendly interface for browsing and selecting emojis, which can be customized to match your application's design.",
   "dependencies": {
     "tslib": "^2.3.0"
   },
-  "sideEffects": false
+  "sideEffects": false,
+  "module": "fesm2022/ngx-easy-image-drawing.mjs",
+  "typings": "index.d.ts",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/PsySanchez/ngx-emoji-picker.git"
+  },
+  "keywords": [
+    "emoji",
+    "angular",
+    "ngx"
+  ]
 }
