@@ -1,44 +1,40 @@
-import { Component } from '@angular/core';
-import { EmojiPickerService } from './emoji-picker.service';
-import { map } from 'rxjs';
+import { Component, EventEmitter, Output } from "@angular/core";
+import { EmojiPickerService } from "./emoji-picker.service";
 
 @Component({
-  selector: 'emoji-picker',
+  selector: "emoji-picker",
   standalone: true,
   imports: [],
-  templateUrl: './emoji-picker.component.html',
-  styleUrl: './emoji-picker.component.scss',
+  templateUrl: "./emoji-picker.component.html",
+  styleUrl: "./emoji-picker.component.scss",
 })
 export class EmojiPicker {
-  emojiList: { name: string; url: any }[] = [];
-  displayedEmojiList: { name: string; url: any }[] = [];
-  emojiGroup: { name: string; emojis: { name: string; url: any }[] }[] = [];
+  emojiList: Array<Emoji> = [];
+  displayedEmojiList: Array<Emoji> = [];
+
+  @Output() selectedEmoji: any = new EventEmitter<string>();
 
   emojiCategories = [
-    { name: 'smiles', icon: '😀' },
-    { name: 'foods', icon: '🍔' },
-    { name: 'flags', icon: '🏳️' },
-    { name: 'hearts', icon: '❤️' },
-    { name: 'hands', icon: '👍' },
-    { name: 'arrows', icon: '➡️' },
-    { name: 'animals', icon: '🐶' },
-    { name: 'clocks', icon: '🕒' },
+    { name: "smileys and people", icon: "😀" },
+    { name: "food and drink", icon: "🍔" },
+    { name: "activities", icon: "⚽" },
+    { name: "travel and places", icon: "🚗" },
+    { name: "objects", icon: "📦" },
+    { name: "symbols", icon: "❤️" },
+    { name: "flags", icon: "🏳️" },
   ];
 
   constructor(private _eps: EmojiPickerService) {}
 
-  selectEmoji(emoji: any) {
-    console.log(emoji);
-  }
-
   ngOnInit() {
-    this._scrollEventListner();
-
     this._eps.getEmojis().subscribe((res: any) => {
-      this.emojiList = Object.keys(res).map((key) => {
+      this.emojiList = res.map((emoji: any) => {
         return {
-          name: key,
-          url: res[key],
+          category: emoji.category,
+          group: emoji.group,
+          htmlCode: emoji.htmlCode[0],
+          name: emoji.name,
+          unicode: emoji.unicode[0],
         };
       });
 
@@ -46,38 +42,30 @@ export class EmojiPicker {
     });
   }
 
-  selectEmojiCategory(category: string) {
-    this.displayedEmojiList = this.emojiList.filter((emoji) =>
-      emoji.name.includes(category)
-    );
+  selectEmoji(emoji: any) {
+    this.selectedEmoji.next(emoji.htmlCode);
   }
 
-  private _scrollEventListner() {
-    const emojiWrapper = document.querySelector('.emoji-wrapper');
+  filterByCategory(category: string) {
+    this.displayedEmojiList = this.emojiList.filter((emoji) =>
+      emoji.category.includes(category)
+    );
+    this._scrollToTop();
+  }
+
+  private _scrollToTop() {
+    const emojiWrapper = document.querySelector(".emoji-wrapper");
 
     if (emojiWrapper) {
-      emojiWrapper.addEventListener('scroll', () => {
-        if (
-          emojiWrapper.scrollTop + emojiWrapper.clientHeight >=
-          emojiWrapper.scrollHeight
-        ) {
-          this.displayedEmojiList = this.displayedEmojiList.concat(
-            this.emojiList.slice(
-              this.displayedEmojiList.length,
-              this.displayedEmojiList.length + 50
-            )
-          );
-        }
-      });
+      emojiWrapper.scrollTo(0, 0);
     }
-  }
-
-  private _filterByKeyword(emojiList: Array<Emoji>, keyword: string) {
-    return emojiList.filter((emoji: Emoji) => emoji.name.includes(keyword));
   }
 }
 
 type Emoji = {
+  category: string;
+  group: string;
+  htmlCode: Array<string>;
   name: string;
-  url: string;
+  unicode: Array<string>;
 };

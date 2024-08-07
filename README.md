@@ -1,24 +1,65 @@
-# NgxEmojiPicker
+## ngx-emoji-picker
 
-This library was generated with [Angular CLI](https://github.com/angular/angular-cli) version 18.1.0.
+![Example Image](https://github.com/PsySanchez/ngx-easy-image-drawing/blob/master/emoji-picker.png)
 
-## Code scaffolding
+Angular library that provides a component for easily integrating emoji selection into your web applications. It offers a user-friendly interface for browsing and selecting emojis, which can be customized to match your application's design.
 
-Run `ng generate component component-name --project ngx-emoji-picker` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module --project ngx-emoji-picker`.
-> Note: Don't forget to add `--project ngx-emoji-picker` or else it will be added to the default project in your `angular.json` file. 
+## Installation
 
-## Build
+```bash
+npm install ngx-emoji-picker
+```
 
-Run `ng build ngx-emoji-picker` to build the project. The build artifacts will be stored in the `dist/` directory.
+## Usage
 
-## Publishing
+1.  Import
 
-After building your library with `ng build ngx-emoji-picker`, go to the dist folder `cd dist/ngx-emoji-picker` and run `npm publish`.
+```typescript
+import { EmojiPicker } from "ngx-emoji-picker";
 
-## Running unit tests
+@NgModule({
+  imports: [EmojiPicker],
+})
+export class AppModule {}
+```
 
-Run `ng test ngx-emoji-picker` to execute the unit tests via [Karma](https://karma-runner.github.io).
+2. Use it in your template
 
-## Further help
+```html
+<emoji-picker (selectedEmoji)="onEmojiSelect($event)"> </emoji-picker>
+```
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+## Example
+
+app.component.ts
+
+```typescript
+import { Component } from "@angular/core";
+import { RouterOutlet } from "@angular/router";
+import { EmojiPicker } from "ngx-emoji-picker";
+
+@Component({
+  selector: "app-root",
+  standalone: true,
+  imports: [RouterOutlet, EmojiPicker],
+  templateUrl: "./app.component.html",
+  styleUrl: "./app.component.css",
+})
+export class AppComponent {
+  title = 'my-project';
+
+  selectedEmoji = '';
+
+  onEmojiSelected(emoji: string) {
+    this.selectedEmoji = emoji;
+  }
+}
+```
+
+app.component.html
+
+```html
+<emoji-picker (selectedEmoji)="onEmojiSelected($event)"> </emoji-picker>
+
+<span [innerHTML]="selectedEmoji"></span>
+```

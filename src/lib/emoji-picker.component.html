@@ -2,15 +2,16 @@
   <div class="emoji-wrapper">
     @for(emoji of displayedEmojiList; track emoji) {
     <div class="emoji" (click)="selectEmoji(emoji)">
-      <img [src]="emoji.url" alt="" width="25" height="25" />
+      <!-- <img [src]="emoji.url" alt="" width="25" height="25" /> -->
+      <span [innerHTML]="emoji.htmlCode"></span>
     </div>
     }
   </div>
   <div class="emoji-button-wrapper">
     @for(category of emojiCategories; track category) {
-    <button class="emoji-button" (click)="selectEmojiCategory(category.name)">
-      <span>{{ category.icon }}</span>
-    </button>
+    <span class="emoji-button" (click)="filterByCategory(category.name)">{{
+      category.icon
+    }}</span>
     }
   </div>
 </div>
