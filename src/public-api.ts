@@ -1,5 +1,5 @@
 /*
- * Public API Surface of ngx-emoji-picker
+ * Public API Surface of ngx-easy-emoji-picker
  */
 
 export * from "./lib/emoji-picker.service";

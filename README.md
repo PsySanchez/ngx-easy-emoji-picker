@@ -1,6 +1,6 @@
-## ngx-emoji-picker
+## ngx-easy-emoji-picker
 
-![Example Image](https://github.com/PsySanchez/ngx-emoji-picker/blob/master/src/emoji-picker.png)
+![Example Image](https://github.com/PsySanchez/ngx-easy-emoji-picker/blob/master/src/emoji-picker.png)
 
 An Angular library to easily pick and use emojis in your application.
 
@@ -18,7 +18,7 @@ You can visit the EmojiHub GitHub repository for more information:
 ## Installation
 
 ```bash
-npm install ngx-emoji-picker
+npm install ngx-easy-emoji-picker
 ```
 
 ## Usage
@@ -26,7 +26,7 @@ npm install ngx-emoji-picker
 1.  Import
 
 ```typescript
-import { EmojiPicker } from "ngx-emoji-picker";
+import { EmojiPicker } from "ngx-easy-emoji-picker";
 
 @NgModule({
   imports: [EmojiPicker],
@@ -47,7 +47,7 @@ app.component.ts
 ```typescript
 import { Component } from "@angular/core";
 import { RouterOutlet } from "@angular/router";
-import { EmojiPicker } from "ngx-emoji-picker";
+import { EmojiPicker } from "ngx-easy-emoji-picker";
 
 @Component({
   selector: "app-root",
