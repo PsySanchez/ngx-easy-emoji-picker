@@ -25,13 +25,38 @@ npm install ngx-easy-emoji-picker
 
 1.  Import
 
+app.module.ts
+
 ```typescript
 import { EmojiPicker } from "ngx-easy-emoji-picker";
+import { HttpClientModule } from "@angular/common/http";
 
 @NgModule({
-  imports: [EmojiPicker],
+  imports: [EmojiPicker, HttpClientModule],
 })
 export class AppModule {}
+```
+
+# for new version of angular
+
+app.config.ts
+
+```typescript
+import { ApplicationConfig, provideZoneChangeDetection } from "@angular/core";
+import { provideRouter } from "@angular/router";
+
+import { routes } from "./app.routes";
+import { provideAnimationsAsync } from "@angular/platform-browser/animations/async";
+import { provideHttpClient } from "@angular/common/http";
+
+export const appConfig: ApplicationConfig = {
+  providers: [
+    provideZoneChangeDetection({ eventCoalescing: true }),
+    provideRouter(routes),
+    provideAnimationsAsync(),
+    provideHttpClient(),
+  ],
+};
 ```
 
 2. Use it in your template
@@ -57,9 +82,9 @@ import { EmojiPicker } from "ngx-easy-emoji-picker";
   styleUrl: "./app.component.css",
 })
 export class AppComponent {
-  title = 'my-project';
+  title = "my-project";
 
-  selectedEmoji = '';
+  selectedEmoji = "";
 
   onEmojiSelected(emoji: string) {
     this.selectedEmoji = emoji;
