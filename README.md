@@ -15,6 +15,13 @@ The emoji data used in this library is sourced from the [EmojiHub](https://githu
 You can visit the EmojiHub GitHub repository for more information:
 [https://github.com/cheatsnake/emojihub](https://github.com/cheatsnake/emojihub)
 
+
+## Versions
+| Version | Option                      |
+|---------|-----------------------------|
+| 0.0.11  | Contains local emoji file.  |
+| 0.0.12  | Works with google cloud cdn.|
+
 ## Installation
 
 ```bash
@@ -82,6 +89,7 @@ export const appConfig: ApplicationConfig = {
 | showCategories      | boolean   | false     | Determines whether to display emoji categories. Set to `true` to show categories, `false` to hide them.       |
 | selectedCategory    | string    | false     | The currently selected emoji category. This value is used to filter and display emojis accordingly.           |
 | categoriesPosition  | string    | false     | Specifies the position of the emoji categories within the component (e.g., 'top', 'bottom', 'left', 'right'). |
+| selectedEmoji       | EventEmitter<string>  | Emitted when an emoji is selected. Payload is the emoji's Unicode character.                                  |
 ```
 
 ## Categories
