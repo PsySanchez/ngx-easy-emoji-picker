@@ -21,6 +21,17 @@ export class EmojiPicker implements OnChanges, OnInit, OnDestroy {
   @Input() width: string = "230px";
   @Input() height: string = "350px";
 
+  @Input() showCategories: boolean = true;
+  @Input() selectedCategory:
+    | "smileys and people"
+    | "food and drink"
+    | "activities"
+    | "travel and places"
+    | "objects"
+    | "symbols"
+    | "flags" = "smileys and people";
+  @Input() categoriesPosition: "top" | "bottom" | "left" | "right" = "bottom";
+
   @Output() selectedEmoji: any = new EventEmitter<string>();
 
   emojiList: Array<Emoji> = [];
@@ -37,8 +48,16 @@ export class EmojiPicker implements OnChanges, OnInit, OnDestroy {
   ];
 
   style = {
-    width: this.width,
-    height: this.height,
+    emojiContainer: {
+      flexDirection: "column",
+    },
+    emojiWrapper: {
+      width: "230px",
+      height: "350px",
+    },
+    emojiButtonsWrapper: {
+      flexDirection: "row",
+    },
   };
 
   private _subscription: Subscription = new Subscription();
@@ -47,25 +66,18 @@ export class EmojiPicker implements OnChanges, OnInit, OnDestroy {
 
   ngOnChanges() {
     this.style = {
-      width: this.width,
-      height: this.height,
+      ...this.style,
+      emojiWrapper: {
+        width: this.width,
+        height: this.height,
+      },
     };
+
+    this._setPositions(this.categoriesPosition);
   }
 
   ngOnInit() {
-    this._subscription.add(
-      this._eps.getEmojis().subscribe((res: any) => {
-        this.emojiList = res.map((emoji: any) => {
-          return {
-            category: emoji.category,
-            htmlCode: emoji.htmlCode,
-            name: emoji.name,
-          };
-        });
-
-        this.filterByCategory("smileys and people");
-      })
-    );
+    this._getEmojis();
   }
 
   selectEmoji(emoji: any) {
@@ -79,11 +91,47 @@ export class EmojiPicker implements OnChanges, OnInit, OnDestroy {
     this._scrollToTop();
   }
 
+  private _getEmojis() {
+    this._subscription.add(
+      this._eps.getEmojis().subscribe((res: any) => {
+        this.emojiList = res.map((emoji: any) => {
+          return {
+            category: emoji.category,
+            htmlCode: emoji.htmlCode,
+            name: emoji.name,
+          };
+        });
+        this.filterByCategory(this.selectedCategory);
+      })
+    );
+  }
+
   private _scrollToTop() {
     const emojiWrapper = document.querySelector(".emoji-wrapper");
 
     if (emojiWrapper) {
       emojiWrapper.scrollTo(0, 0);
+    }
+  }
+
+  private _setPositions(position: string): void {
+    switch (position) {
+      case "top":
+        this.style.emojiContainer.flexDirection = "column";
+        this.style.emojiButtonsWrapper.flexDirection = "row";
+        break;
+      case "bottom":
+        this.style.emojiContainer.flexDirection = "column-reverse";
+        this.style.emojiButtonsWrapper.flexDirection = "row";
+        break;
+      case "left":
+        this.style.emojiContainer.flexDirection = "row";
+        this.style.emojiButtonsWrapper.flexDirection = "column";
+        break;
+      case "right":
+        this.style.emojiContainer.flexDirection = "row-reverse";
+        this.style.emojiButtonsWrapper.flexDirection = "column";
+        break;
     }
   }
 

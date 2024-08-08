@@ -23,6 +23,8 @@ npm install ngx-easy-emoji-picker
 
 ## Usage
 
+**Mandatory module import HttpClientModule**
+
 1.  Import
 
 app.module.ts
@@ -37,23 +39,20 @@ import { HttpClientModule } from "@angular/common/http";
 export class AppModule {}
 ```
 
-**for new version of angular**
+**For new version of angular**
 
 app.config.ts
 
 ```typescript
 import { ApplicationConfig, provideZoneChangeDetection } from "@angular/core";
 import { provideRouter } from "@angular/router";
-
 import { routes } from "./app.routes";
-import { provideAnimationsAsync } from "@angular/platform-browser/animations/async";
 import { provideHttpClient } from "@angular/common/http";
 
 export const appConfig: ApplicationConfig = {
   providers: [
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideRouter(routes),
-    provideAnimationsAsync(),
     provideHttpClient(),
   ],
 };
@@ -66,6 +65,9 @@ export const appConfig: ApplicationConfig = {
   (selectedEmoji)="onEmojiSelected($event)"
   width="230px"
   height="350px"
+  [showCategories]="true"
+  selectedCategory="smileys and people"
+  categoriesPosition="bottom"
 >
 </emoji-picker>
 ```
@@ -73,10 +75,19 @@ export const appConfig: ApplicationConfig = {
 ## Options
 
 ```markdown
-| Option          | Type                 | Description                                                                                       |
-| --------------- | -------------------- | ------------------------------------------------------------------------------------------------- |
-| height          | number               | The height of the emojis container in pixels (optional parameter).                                                               |
-| width           | number               | The width of the emojis container in pixels (optional parameter).                                                                |
+| Option              | Type      | Mandatory | Description                                                                                                   |
+| ------------------- | --------- | --------- | ------------------------------------------------------------------------------------------------------------- |
+| height              | number    | false     | The height of the container holding the emojis in pixels. If not specified, a default height will be used.    |
+| width               | number    | false     | The width of the container holding the emojis in pixels. If not specified, a default width will be used.      |
+| showCategories      | boolean   | false     | Determines whether to display emoji categories. Set to `true` to show categories, `false` to hide them.       |
+| selectedCategory    | string    | false     | The currently selected emoji category. This value is used to filter and display emojis accordingly.           |
+| categoriesPosition  | string    | false     | Specifies the position of the emoji categories within the component (e.g., 'top', 'bottom', 'left', 'right'). |
+```
+
+## Categories
+
+```markdown
+    ["smileys and people", "food and drink", "activities", "travel and places", "objects",  "symbols", "flags"]
 ```
 
 ## Example
@@ -109,7 +120,15 @@ export class AppComponent {
 app.component.html
 
 ```html
-<emoji-picker (selectedEmoji)="onEmojiSelected($event)"> </emoji-picker>
+<emoji-picker
+  (selectedEmoji)="onEmojiSelected($event)"
+  width="230px"
+  height="350px"
+  [showCategories]="true"
+  selectedCategory="smileys and people"
+  categoriesPosition="bottom"
+>
+</emoji-picker>
 
 <span [innerHTML]="selectedEmoji"></span>
 ```
