@@ -1,5 +1,6 @@
-import { Component, EventEmitter, Output } from "@angular/core";
+import { Component, EventEmitter, OnDestroy, OnInit, Output } from "@angular/core";
 import { EmojiPickerService } from "./emoji-picker.service";
+import { Subscription } from "rxjs";
 
 @Component({
   selector: "emoji-picker",
@@ -8,7 +9,7 @@ import { EmojiPickerService } from "./emoji-picker.service";
   templateUrl: "./emoji-picker.component.html",
   styleUrl: "./emoji-picker.component.scss",
 })
-export class EmojiPicker {
+export class EmojiPicker implements OnInit, OnDestroy {
   emojiList: Array<Emoji> = [];
   displayedEmojiList: Array<Emoji> = [];
 
@@ -24,22 +25,24 @@ export class EmojiPicker {
     { name: "flags", icon: "🏳️" },
   ];
 
+  private _subscription: Subscription = new Subscription();
+
   constructor(private _eps: EmojiPickerService) {}
 
   ngOnInit() {
-    this._eps.getEmojis().subscribe((res: any) => {
-      this.emojiList = res.map((emoji: any) => {
-        return {
-          category: emoji.category,
-          group: emoji.group,
-          htmlCode: emoji.htmlCode[0],
-          name: emoji.name,
-          unicode: emoji.unicode[0],
-        };
-      });
+    this._subscription.add(
+      this._eps.getEmojis().subscribe((res: any) => {
+        this.emojiList = res.map((emoji: any) => {
+          return {
+            category: emoji.category,
+            htmlCode: emoji.htmlCode,
+            name: emoji.name,
+          };
+        });
 
-      this.displayedEmojiList = this.emojiList.slice(0, 100);
-    });
+        this.filterByCategory("smileys and people");
+      })
+    );
   }
 
   selectEmoji(emoji: any) {
@@ -60,12 +63,15 @@ export class EmojiPicker {
       emojiWrapper.scrollTo(0, 0);
     }
   }
+
+  ngOnDestroy() {
+    this.selectedEmoji.unsubscribe();
+    this._subscription.unsubscribe();
+  }
 }
 
 type Emoji = {
   category: string;
-  group: string;
   htmlCode: Array<string>;
   name: string;
-  unicode: Array<string>;
 };
