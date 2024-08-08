@@ -75,8 +75,8 @@ export const appConfig: ApplicationConfig = {
 ```markdown
 | Option          | Type                 | Description                                                                                       |
 | --------------- | -------------------- | ------------------------------------------------------------------------------------------------- |
-| height          | number               | The height of the canvas in pixels.                                                               |
-| width           | number               | The width of the canvas in pixels.                                                                |
+| height          | number               | The height of the emoji container in pixels.                                                               |
+| width           | number               | The width of the emoji container in pixels.                                                                |
 ```
 
 ## Example
