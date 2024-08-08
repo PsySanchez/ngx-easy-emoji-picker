@@ -17,10 +17,10 @@ You can visit the EmojiHub GitHub repository for more information:
 
 
 ## Versions
-| Version | Option                      |
-|---------|-----------------------------|
-| 0.0.11  | Contains local emoji file.  |
-| 0.0.12  | Works with google cloud cdn.|
+| Version  | Option                      |
+|----------|-----------------------------|
+|  0.0.11  | Contains local emoji file.  |
+| ^0.0.12  | Works with google cloud cdn.|
 
 ## Installation
 
