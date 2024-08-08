@@ -1,5 +1,5 @@
 <div class="emoji-container">
-  <div class="emoji-wrapper">
+  <div class="emoji-wrapper" [style]="style">
     @for(emoji of displayedEmojiList; track emoji) {
     <div class="emoji" (click)="selectEmoji(emoji)">
       <!-- <img [src]="emoji.url" alt="" width="25" height="25" /> -->

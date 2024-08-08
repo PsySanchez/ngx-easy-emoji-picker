@@ -1,6 +1,6 @@
 {
   "name": "ngx-easy-emoji-picker",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "author": "Alex Voronin <alex.varonin@gmail.com>",
   "license": "MIT",
   "peerDependencies": {

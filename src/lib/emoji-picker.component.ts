@@ -1,4 +1,12 @@
-import { Component, EventEmitter, OnDestroy, OnInit, Output } from "@angular/core";
+import {
+  Component,
+  EventEmitter,
+  Input,
+  OnChanges,
+  OnDestroy,
+  OnInit,
+  Output,
+} from "@angular/core";
 import { EmojiPickerService } from "./emoji-picker.service";
 import { Subscription } from "rxjs";
 
@@ -9,11 +17,14 @@ import { Subscription } from "rxjs";
   templateUrl: "./emoji-picker.component.html",
   styleUrl: "./emoji-picker.component.scss",
 })
-export class EmojiPicker implements OnInit, OnDestroy {
-  emojiList: Array<Emoji> = [];
-  displayedEmojiList: Array<Emoji> = [];
+export class EmojiPicker implements OnChanges, OnInit, OnDestroy {
+  @Input() width: string = "";
+  @Input() height: string = "";
 
   @Output() selectedEmoji: any = new EventEmitter<string>();
+
+  emojiList: Array<Emoji> = [];
+  displayedEmojiList: Array<Emoji> = [];
 
   emojiCategories = [
     { name: "smileys and people", icon: "😀" },
@@ -25,9 +36,21 @@ export class EmojiPicker implements OnInit, OnDestroy {
     { name: "flags", icon: "🏳️" },
   ];
 
+  style = {
+    width: "230px",
+    height: "350px",
+  };
+
   private _subscription: Subscription = new Subscription();
 
   constructor(private _eps: EmojiPickerService) {}
+
+  ngOnChanges() {
+    this.style = {
+      width: this.width,
+      height: this.height,
+    };
+  }
 
   ngOnInit() {
     this._subscription.add(

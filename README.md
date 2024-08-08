@@ -62,7 +62,21 @@ export const appConfig: ApplicationConfig = {
 2. Use it in your template
 
 ```html
-<emoji-picker (selectedEmoji)="onEmojiSelect($event)"> </emoji-picker>
+<emoji-picker
+  (selectedEmoji)="onEmojiSelected($event)"
+  width="230px"
+  height="350px"
+>
+</emoji-picker>
+```
+
+## Options
+
+```markdown
+| Option          | Type                 | Description                                                                                       |
+| --------------- | -------------------- | ------------------------------------------------------------------------------------------------- |
+| height          | number               | The height of the canvas in pixels.                                                               |
+| width           | number               | The width of the canvas in pixels.                                                                |
 ```
 
 ## Example
