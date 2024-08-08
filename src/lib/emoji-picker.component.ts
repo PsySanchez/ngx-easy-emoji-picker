@@ -18,8 +18,8 @@ import { Subscription } from "rxjs";
   styleUrl: "./emoji-picker.component.scss",
 })
 export class EmojiPicker implements OnChanges, OnInit, OnDestroy {
-  @Input() width: string = "";
-  @Input() height: string = "";
+  @Input() width: string = "230px";
+  @Input() height: string = "350px";
 
   @Output() selectedEmoji: any = new EventEmitter<string>();
 
@@ -37,8 +37,8 @@ export class EmojiPicker implements OnChanges, OnInit, OnDestroy {
   ];
 
   style = {
-    width: "230px",
-    height: "350px",
+    width: this.width,
+    height: this.height,
   };
 
   private _subscription: Subscription = new Subscription();
