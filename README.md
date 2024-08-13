@@ -8,13 +8,6 @@ An Angular library to easily pick and use emojis in your application.
 
 This library provides a user-friendly emoji picker component that you can integrate into your Angular applications. It includes a comprehensive set of emojis that you can use for various purposes, such as in chat applications, comment sections, and more.
 
-### Emoji Data Source
-
-The emoji data used in this library is sourced from the [EmojiHub](https://github.com/cheatsnake/emojihub) project by cheatsnake. EmojiHub is an open-source project that provides a large collection of emojis categorized for easy access.
-
-You can visit the EmojiHub GitHub repository for more information:
-[https://github.com/cheatsnake/emojihub](https://github.com/cheatsnake/emojihub)
-
 
 ## Versions
 | Version  | Option                      |
@@ -140,3 +133,11 @@ app.component.html
 
 <span [innerHTML]="selectedEmoji"></span>
 ```
+
+
+### Emoji Data Source
+
+The emoji data used in this library is sourced from the [EmojiHub](https://github.com/cheatsnake/emojihub) project by cheatsnake. EmojiHub is an open-source project that provides a large collection of emojis categorized for easy access.
+
+You can visit the EmojiHub GitHub repository for more information:
+[https://github.com/cheatsnake/emojihub](https://github.com/cheatsnake/emojihub)
