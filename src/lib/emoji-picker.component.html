@@ -1,6 +1,6 @@
 <div class="emoji-container" [style]="style.emojiContainer">
   <!-- buttons -->
-  @if(showCategories) {
+  @if(showCategories()) {
   <div class="emoji-buttons-wrapper" [style]="style.emojiButtonsWrapper">
     @for(category of emojiCategories; track category) {
     <span class="emoji-button" (click)="filterByCategory(category.name)">{{

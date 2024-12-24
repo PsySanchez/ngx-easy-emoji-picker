@@ -1,11 +1,10 @@
 import {
   Component,
-  EventEmitter,
-  Input,
+  input,
   OnChanges,
   OnDestroy,
   OnInit,
-  Output,
+  output,
 } from "@angular/core";
 import { EmojiPickerService } from "./emoji-picker.service";
 import { Subscription } from "rxjs";
@@ -18,21 +17,14 @@ import { Subscription } from "rxjs";
   styleUrl: "./emoji-picker.component.scss",
 })
 export class EmojiPicker implements OnChanges, OnInit, OnDestroy {
-  @Input() width: string = "230px";
-  @Input() height: string = "350px";
+  width = input<string>("230px");
+  height = input<string>("350px");
+  showCategories = input<boolean>(true);
+  selectedCategory = input<CategoriesType>("smileys and people");
 
-  @Input() showCategories: boolean = true;
-  @Input() selectedCategory:
-    | "smileys and people"
-    | "food and drink"
-    | "activities"
-    | "travel and places"
-    | "objects"
-    | "symbols"
-    | "flags" = "smileys and people";
-  @Input() categoriesPosition: "top" | "bottom" | "left" | "right" = "bottom";
+  categoriesPosition = input<CategoriesPosition>("bottom");
 
-  @Output() selectedEmoji: any = new EventEmitter<string>();
+  selectedEmoji = output<string>();
 
   emojiList: Array<Emoji> = [];
   displayedEmojiList: Array<Emoji> = [];
@@ -68,12 +60,12 @@ export class EmojiPicker implements OnChanges, OnInit, OnDestroy {
     this.style = {
       ...this.style,
       emojiWrapper: {
-        width: this.width,
-        height: this.height,
+        width: this.width(),
+        height: this.height(),
       },
     };
 
-    this._setPositions(this.categoriesPosition);
+    this._setPositions(this.categoriesPosition());
   }
 
   ngOnInit() {
@@ -81,7 +73,7 @@ export class EmojiPicker implements OnChanges, OnInit, OnDestroy {
   }
 
   selectEmoji(emoji: any) {
-    this.selectedEmoji.next(emoji.htmlCode);
+    this.selectedEmoji.emit(emoji.htmlCode);
   }
 
   filterByCategory(category: string) {
@@ -101,7 +93,22 @@ export class EmojiPicker implements OnChanges, OnInit, OnDestroy {
             name: emoji.name,
           };
         });
-        this.filterByCategory(this.selectedCategory);
+
+        const uniqueEmojis = Array.from(
+          new Map(
+            this.emojiList.map((emoji) => [
+              emoji.htmlCode,
+              { category: emoji.category, htmlCode: emoji.htmlCode },
+            ])
+          ).values()
+        );
+
+        console.log(
+          "🚀 ~ EmojiPicker ~ this.emojiList=res.map ~ uniqueEmojis:",
+          uniqueEmojis
+        );
+
+        this.filterByCategory(this.selectedCategory());
       })
     );
   }
@@ -136,7 +143,6 @@ export class EmojiPicker implements OnChanges, OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.selectedEmoji.unsubscribe();
     this._subscription.unsubscribe();
   }
 }
@@ -146,3 +152,14 @@ type Emoji = {
   htmlCode: Array<string>;
   name: string;
 };
+
+type CategoriesPosition = "top" | "bottom" | "left" | "right";
+
+type CategoriesType =
+  | "smileys and people"
+  | "food and drink"
+  | "activities"
+  | "travel and places"
+  | "objects"
+  | "symbols"
+  | "flags";
