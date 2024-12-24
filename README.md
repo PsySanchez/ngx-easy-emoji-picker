@@ -14,6 +14,7 @@ This library provides a user-friendly emoji picker component that you can integr
 |----------|-----------------------------|
 |  0.0.11  | Contains local emoji file.  |
 | ^0.0.12  | Works with google cloud cdn.|
+| ^0.0.14  | Works with signals.         |
 
 ## Installation
 
@@ -75,14 +76,14 @@ export const appConfig: ApplicationConfig = {
 ## Options
 
 ```markdown
-| Option              | Type      | Mandatory | Description                                                                                                   |
-| ------------------- | --------- | --------- | ------------------------------------------------------------------------------------------------------------- |
-| height              | number    | false     | The height of the container holding the emojis in pixels. If not specified, a default height will be used.    |
-| width               | number    | false     | The width of the container holding the emojis in pixels. If not specified, a default width will be used.      |
-| showCategories      | boolean   | false     | Determines whether to display emoji categories. Set to `true` to show categories, `false` to hide them.       |
-| selectedCategory    | string    | false     | The currently selected emoji category. This value is used to filter and display emojis accordingly.           |
-| categoriesPosition  | string    | false     | Specifies the position of the emoji categories within the component (e.g., 'top', 'bottom', 'left', 'right'). |
-| selectedEmoji       | EventEmitter<string>  | Emitted when an emoji is selected. Payload is the emoji's Unicode character.                                  |
+| Option              | Type      | Mandatory     | Description                                                                                                   |
+| ------------------- | --------- | ------------- | ------------------------------------------------------------------------------------------------------------- |
+| height              | number    | false         | The height of the container holding the emojis in pixels. If not specified, a default height will be used.    |
+| width               | number    | false         | The width of the container holding the emojis in pixels. If not specified, a default width will be used.      |
+| showCategories      | boolean   | false         | Determines whether to display emoji categories. Set to `true` to show categories, `false` to hide them.       |
+| selectedCategory    | string    | false         | The currently selected emoji category. This value is used to filter and display emojis accordingly.           |
+| categoriesPosition  | string    | false         | Specifies the position of the emoji categories within the component (e.g., 'top', 'bottom', 'left', 'right'). |
+| selectedEmoji       | OutputEmitterRef<string>  | Emitted when an emoji is selected. Payload is the emoji's Unicode character.                                  |
 ```
 
 ## Categories
