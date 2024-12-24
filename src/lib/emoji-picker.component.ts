@@ -21,9 +21,7 @@ export class EmojiPicker implements OnChanges, OnInit, OnDestroy {
   height = input<string>("350px");
   showCategories = input<boolean>(true);
   selectedCategory = input<CategoriesType>("smileys and people");
-
   categoriesPosition = input<CategoriesPosition>("bottom");
-
   selectedEmoji = output<string>();
 
   emojiList: Array<Emoji> = [];
@@ -90,23 +88,8 @@ export class EmojiPicker implements OnChanges, OnInit, OnDestroy {
           return {
             category: emoji.category,
             htmlCode: emoji.htmlCode,
-            name: emoji.name,
           };
         });
-
-        const uniqueEmojis = Array.from(
-          new Map(
-            this.emojiList.map((emoji) => [
-              emoji.htmlCode,
-              { category: emoji.category, htmlCode: emoji.htmlCode },
-            ])
-          ).values()
-        );
-
-        console.log(
-          "🚀 ~ EmojiPicker ~ this.emojiList=res.map ~ uniqueEmojis:",
-          uniqueEmojis
-        );
 
         this.filterByCategory(this.selectedCategory());
       })
@@ -150,7 +133,6 @@ export class EmojiPicker implements OnChanges, OnInit, OnDestroy {
 type Emoji = {
   category: string;
   htmlCode: Array<string>;
-  name: string;
 };
 
 type CategoriesPosition = "top" | "bottom" | "left" | "right";
