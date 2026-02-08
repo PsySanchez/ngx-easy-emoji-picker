@@ -15,6 +15,7 @@ This library provides a user-friendly emoji picker component that you can integr
 |  0.0.11  | Contains local emoji file.  |
 | ^0.0.12  | Works with google cloud cdn.|
 | ^0.0.14  | Works with signals.         |
+| ^0.1.1   | Angular 19.                 |
 
 ## Installation
 

@@ -10,11 +10,10 @@ import { EmojiPickerService } from "./emoji-picker.service";
 import { Subscription } from "rxjs";
 
 @Component({
-  selector: "emoji-picker",
-  standalone: true,
-  imports: [],
-  templateUrl: "./emoji-picker.component.html",
-  styleUrl: "./emoji-picker.component.scss",
+    selector: "emoji-picker",
+    imports: [],
+    templateUrl: "./emoji-picker.component.html",
+    styleUrl: "./emoji-picker.component.scss"
 })
 export class EmojiPicker implements OnChanges, OnInit, OnDestroy {
   width = input<string>("230px");
