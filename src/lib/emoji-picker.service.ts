@@ -8,7 +8,7 @@ import { map, Observable } from "rxjs";
 })
 export class EmojiPickerService {
   emojis: any;
-  constructor(private _http: HttpClient) {}
+  constructor(private readonly _http: HttpClient) {}
 
   getEmojis() {
     if (this.emojis) {

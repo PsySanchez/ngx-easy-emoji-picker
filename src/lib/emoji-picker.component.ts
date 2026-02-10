@@ -1,4 +1,6 @@
 import {
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
   Component,
   input,
   OnChanges,
@@ -10,10 +12,12 @@ import { EmojiPickerService } from "./emoji-picker.service";
 import { Subscription } from "rxjs";
 
 @Component({
-    selector: "emoji-picker",
-    imports: [],
-    templateUrl: "./emoji-picker.component.html",
-    styleUrl: "./emoji-picker.component.scss"
+  selector: "emoji-picker",
+  standalone: true,
+  imports: [],
+  templateUrl: "./emoji-picker.component.html",
+  styleUrl: "./emoji-picker.component.scss",
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class EmojiPicker implements OnChanges, OnInit, OnDestroy {
   width = input<string>("230px");
@@ -49,9 +53,9 @@ export class EmojiPicker implements OnChanges, OnInit, OnDestroy {
     },
   };
 
-  private _subscription: Subscription = new Subscription();
+  private readonly _subscription: Subscription = new Subscription();
 
-  constructor(private _eps: EmojiPickerService) {}
+  constructor(private readonly _eps: EmojiPickerService, private readonly _cdRef: ChangeDetectorRef) { }
 
   ngOnChanges() {
     this.style = {
@@ -91,6 +95,7 @@ export class EmojiPicker implements OnChanges, OnInit, OnDestroy {
         });
 
         this.filterByCategory(this.selectedCategory());
+        this._cdRef.detectChanges();
       })
     );
   }

@@ -13,7 +13,6 @@
   <div class="emoji-wrapper" [style]="style.emojiWrapper">
     @for(emoji of displayedEmojiList; track emoji) {
     <div class="emoji" (click)="selectEmoji(emoji)">
-      <!-- <img [src]="emoji.url" alt="" width="25" height="25" /> -->
       <span [innerHTML]="emoji.htmlCode"></span>
     </div>
     }
