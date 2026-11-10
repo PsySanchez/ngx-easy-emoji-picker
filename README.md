@@ -10,7 +10,7 @@ This library provides a user-friendly emoji picker component that you can integr
 
 
 ## Versions
-| Version  | Option                      |
+| Version  | Option                                          |
 |----------|-------------------------------------------------|
 |  0.0.11  | Contains local emoji file.                      |
 | ^0.0.12  | Works with google cloud cdn.                    |
@@ -18,6 +18,8 @@ This library provides a user-friendly emoji picker component that you can integr
 | ^0.1.1   | Angular 19.                                     |
 | ^0.1.2   | Angular 20.                                     |
 | ^0.1.3   | Added angular support from ^18.0.0 to ^21.0.0   |
+| ^0.1.4   | Added angular support from ^18.0.0 to ^22.0.0   |
+
 
 ## Installation
 
@@ -137,11 +139,3 @@ app.component.html
 
 <span [innerHTML]="selectedEmoji"></span>
 ```
-
-
-### Emoji Data Source
-
-The emoji data used in this library is sourced from the [EmojiHub](https://github.com/cheatsnake/emojihub) project by cheatsnake. EmojiHub is an open-source project that provides a large collection of emojis categorized for easy access.
-
-You can visit the EmojiHub GitHub repository for more information:
-[https://github.com/cheatsnake/emojihub](https://github.com/cheatsnake/emojihub)

@@ -86,7 +86,7 @@ export class EmojiPicker implements OnChanges, OnInit, OnDestroy {
 
   private _getEmojis() {
     this._subscription.add(
-      this._eps.getEmojis().subscribe((res: any) => {
+      this._eps.getEmojiFromJson().subscribe((res: any) => {
         this.emojiList = res.map((emoji: any) => {
           return {
             category: emoji.category,
